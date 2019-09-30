@@ -3,8 +3,10 @@ package grades;
 import java.util.HashMap;
 
 public class GradesApplication {
+
+        private static HashMap<String, Student> studentMap = new HashMap<>();
+
     public static void main(String[] args) {
-        HashMap<String, Student> studentMap = new HashMap<>();
 
         Student student1 = new Student("Mark", 54);
         Student student2 = new Student("Izzy", 66);
@@ -24,7 +26,42 @@ public class GradesApplication {
         studentMap.put("gitMatt", student3);
         studentMap.put("gitBryan", student4);
 
-
+        displayMenu();
 
     }
+
+    public static void displayMenu() {
+        Input input = new Input();
+
+        System.out.println("        Welcome!\n" +
+                "\n" +
+                "                Here are the GitHub usernames of our students:\n");
+
+        for (String key : studentMap.keySet()){
+            System.out.print("|" + key + "| ");
+        }
+        System.out.println("\n");
+
+//        System.out.println("What student would you like to see more information on?");
+
+        boolean keepAsk = true;
+        String userSearch;
+
+        do{
+            userSearch = input.getString("What student would you like to see more information on?");
+
+            if(studentMap.get(userSearch) == null){
+                System.out.println("Sorry no student found for " + userSearch);
+            } else{
+                System.out.println("GitHub Username = " + userSearch);
+                System.out.println("Name: " + studentMap.get(userSearch).getName());
+                System.out.println("Current Average: " +studentMap.get(userSearch).getGradeAverage());
+                keepAsk = false;
+            }
+
+
+        }while(keepAsk);
+
+    }
+
 }
