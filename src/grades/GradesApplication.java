@@ -25,42 +25,32 @@ public class GradesApplication {
         studentMap.put("izzyBrash", student2);
         studentMap.put("gitMatt", student3);
         studentMap.put("gitBryan", student4);
+        System.out.println(studentMap);
 
         displayMenu();
 
     }
 
     public static void displayMenu() {
+
         Input input = new Input();
+        System.out.println("Welcome!\n");
 
-        System.out.println("        Welcome!\n" +
-                "\n" +
-                "                Here are the GitHub usernames of our students:\n");
+        System.out.println();
 
-        for (String key : studentMap.keySet()){
-            System.out.print("|" + key + "| ");
+        System.out.println(
+                "What would you like to do? \n" +
+                "1) view individual student information \n" +
+                "2) view information for all students.");
+
+        int userChoice = input.getInt(1,2);
+
+        if (userChoice == 1){
+            individualStudent();
+        }else {
+            allStudents();
         }
-        System.out.println("\n");
 
-//        System.out.println("What student would you like to see more information on?");
-
-        boolean keepAsk = true;
-        String userSearch;
-
-        do{
-            userSearch = input.getString("What student would you like to see more information on?");
-
-            if(studentMap.get(userSearch) == null){
-                System.out.println("Sorry no student found for " + userSearch);
-            } else{
-                System.out.println("GitHub Username = " + userSearch);
-                System.out.println("Name: " + studentMap.get(userSearch).getName());
-                System.out.println("Current Average: " +studentMap.get(userSearch).getGradeAverage());
-                keepAsk = false;
-            }
-
-
-        }while(keepAsk);
 
         System.out.println("would you like to see another student");
         if(input.yesNo()){
@@ -68,6 +58,79 @@ public class GradesApplication {
         }else{
             System.out.println("have a wonderful day");
         }
+
+    }
+
+    public static void individualStudent(){
+        Input input = new Input();
+        boolean keepAsk = true;
+        String userSearch;
+
+        System.out.println(" Here are the GitHub usernames of our students:\n");
+        for (String key : studentMap.keySet()){
+            System.out.print("  |" + key + "| ");
+        }
+        System.out.println("\n");
+
+        do{
+            userSearch = input.getString(" What student would you like to see more information on?");
+
+            if(studentMap.get(userSearch) == null){
+                System.out.println("Sorry no student found for " + userSearch);
+            } else{
+                System.out.println("GitHub Username: " + userSearch);
+                System.out.println("Name: " + studentMap.get(userSearch).getName());
+                System.out.println("Current Average: " +studentMap.get(userSearch).getGradeAverage());
+                System.out.println("Grades: " +studentMap.get(userSearch).getGrades());
+                keepAsk = false;
+            }
+        }while(keepAsk);
+    }
+
+
+//    Allow the user to view all of the grades for all of the students.
+//
+//    Modify your CLI to provide an option to view the overall class average.
+//
+//    Modify your CLI to provide an option to print a csv report of all the students.
+
+    public static void allStudents(){
+        Input input = new Input();
+        System.out.println(
+                "What would you like to do? \n" +
+                        "1) View all Student's grades \n"+
+                        "2) View class average\n " +
+                        "3) View csv report for all students"
+        );
+
+        int userChoice = input.getInt(1,3);
+
+        if(userChoice == 1){
+            for (Student student : studentMap.values()) {
+                System.out.println("Student Name: " + student.getName());
+                System.out.println("Student Grades: " + student.getGrades());
+            }
+        }else if(userChoice == 2){
+            double total = 0.0;
+            for (Student student : studentMap.values()){
+                total += student.getGradeAverage();
+            }
+            System.out.println(total/studentMap.size());
+        }else if(userChoice == 3){
+            System.out.println("Name, GitHub Username, Average");
+
+//
+            for (Student student : studentMap.values()) {
+                System.out.print( student.getName() + ", ");
+                System.out.print(student.getKey(student) + ", ");
+
+                System.out.print(student.getGradeAverage() + "\n");
+
+            }
+        }
+
+
+
 
     }
 
