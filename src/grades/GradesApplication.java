@@ -62,6 +62,13 @@ public class GradesApplication {
 
         }while(keepAsk);
 
+        System.out.println("would you like to see another student");
+        if(input.yesNo()){
+            displayMenu();
+        }else{
+            System.out.println("have a wonderful day");
+        }
+
     }
 
 }
