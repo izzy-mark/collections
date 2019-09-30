@@ -1,5 +1,6 @@
 package grades;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GradesApplication {
@@ -117,16 +118,31 @@ public class GradesApplication {
             }
             System.out.println(total/studentMap.size());
         }else if(userChoice == 3){
+
+            ArrayList<String> gitUser = new ArrayList<>();
+
+            for (String key : studentMap.keySet()){
+                gitUser.add(key);
+            }
+//            System.out.println(gitUser);
+//            System.out.println(gitUser.get(0));
+
+
+
             System.out.println("Name, GitHub Username, Average");
 
-//
-            for (Student student : studentMap.values()) {
-                System.out.print( student.getName() + ", ");
-                System.out.print(student.getKey(student) + ", ");
 
-                System.out.print(student.getGradeAverage() + "\n");
+           int counter = 0;
 
-            }
+                for (Student student : studentMap.values()) {
+                    System.out.print( student.getName() + ", ");
+                    System.out.print(gitUser.get(counter) + ", ");
+                    System.out.print(student.getGradeAverage() + "\n");
+                    counter++;
+                }
+
+
+
         }
 
 
