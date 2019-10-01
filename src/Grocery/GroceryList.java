@@ -14,7 +14,35 @@ public class GroceryList {
 
     private String itemName;
     private int amount;
-//    private String[] category;
+    private String category;
 
+    public GroceryList(String itemName, int amount, String category) {
+        this.itemName = itemName;
+        this.amount = amount;
+        this.category = category;
+    }
 
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }
